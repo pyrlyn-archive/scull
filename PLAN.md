@@ -1,6 +1,6 @@
 # Scull: Kotlin/Native rewrite plan
 
-Status: not started. The previous Rust core was removed in the pull request that added this
+Status: in progress. The previous Rust core was removed in the pull request that added this
 file (see [Repository reset](#7-repository-reset)). Every task in [`plan/`](plan/README.md)
 is reset to not started; phases below map onto those tasks.
 
@@ -90,7 +90,7 @@ Each phase lists the existing `plan/T*` tasks. Every checkbox starts unchecked.
 
 ### Phase 0: decisions and skeleton
 
-- [ ] **T1.** Reaffirm `research.md` §8; record that the VT core is Kotlin/Native.
+- [x] **T1.** Reaffirm `research.md` §8; record that the VT core is Kotlin/Native.
 - [ ] **T2.** Gradle KMP workspace, seven modules, pinned JDK 21, ktlint, `./gradlew check`, CI skeleton.
 
 ### Phase 1: harness

@@ -2,7 +2,7 @@
 status: in progress
 priority: P0
 complexity: 1
-readiness: 10%
+readiness: 100%
 agent: Claude Code / claude-opus-5-5
 ---
 
@@ -11,8 +11,8 @@ agent: Claude Code / claude-opus-5-5
 Answer the open questions of `research.md` §8; T1 blocks all other work. The earlier answers still stand, with one stack change: the VT core is our own Kotlin/Native code, not Rust and not libghostty-vt. Record the decisions in `AGENTS.md`.
 
 Acceptance:
-- [ ] Every §8 question is answered and written down in `AGENTS.md` and `research.md` §8.
-- [ ] The core language is recorded as Kotlin/Native.
+- [x] Every §8 question is answered and written down in `AGENTS.md` and `research.md` §8.
+- [x] The core language is recorded as Kotlin/Native.
 
 ## Execution plan
 
