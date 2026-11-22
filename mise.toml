@@ -4,6 +4,6 @@
 [tools]
 java = "temurin-21" # runs Gradle and the Kotlin/Native compiler
 # Workflow lint (hk.pkl); CI lints through the jactionlint job in ci.yml.
-"github:jdx/jactionlint" = "2.0.2" # the pre-push hook and local `mise x -- jactionlint`
+"github:jdx/jactionlint" = "2.6.0" # the pre-push hook and local `mise x -- jactionlint`
 hk = "2.5.0" # runs jactionlint as a pre-push hook (hk.pkl); `mise x -- hk install --mise`
 shellcheck = "0.11.0" # used by jactionlint for run: scripts; CI uses the runner image's copy
