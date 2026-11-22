@@ -158,13 +158,13 @@ Two facts narrow what the library has to cover, both from the Windows App SDK re
 ## 7. Architecture plan
 
 ```
-        Swift (macOS)                         C# / C++ (Windows)
+        Swift (macOS)                         C# (Windows)
   SwiftUI chrome + NSView surface       WinUI 3 chrome + SwapChainPanel
   Metal + CoreText, NSTextInputClient   D3D11 + DirectWrite, TSF, UIA
               │                                      │
               └────────── C ABI (scull.h) ───────────┘
                                │
-   scull-ffi      handles, frame snapshot, event queue, panic guard
+   scull-ffi      handles, frame snapshot, event queue, exception guard
    scull-term     session: screens, modes, cursor, selection, search
    scull-input    key, mouse, paste, focus encoders
    scull-grid     cells, rows, ring, reflow, damage, images, links
@@ -186,7 +186,7 @@ Rules of the boundary (ffi-native-ui.md Part 4):
 
 ## 8. Decisions
 
-The creator accepted the recommendations below except 2, where the choice is all C#, and 5, where the minimum is macOS 26. The licence (6) is GPL-3.0-or-later.
+The creator accepted the recommendations below except 2, where the choice is all C#, and 5, where the minimum is macOS 26. The licence (6) is GPL-3.0-or-later. The core language (8) changed from Rust to Kotlin/Native in the rewrite that `PLAN.md` describes; no question is left open.
 
 | # | Decision | Recommendation |
 | --- | --- | --- |
@@ -197,6 +197,7 @@ The creator accepted the recommendations below except 2, where the choice is all
 | 5 | Minimum macOS | Recommended: 14, for `CAMetalDisplayLink`. **Creator chose 26** |
 | 6 | Project licence | **Creator chose GPL-3.0-or-later**, with paid subscription services around the terminal. MIT, Apache-2.0 and GPL-3 sources may be ported; Warp's AGPL core stays study-only |
 | 7 | Split panes on Windows | One swap chain per window, panes as viewports; Microsoft advises at most four swap chains |
+| 8 | Core language | **Creator chose Kotlin/Native**, built with Gradle and the Kotlin Multiplatform plugin for `macosArm64`, `linuxX64` and `mingwX64`; it replaces the earlier Rust core. The C ABI shape (committed `scull.h` and C# bindings) is unchanged |
 
 ## 9. Unverified
 
