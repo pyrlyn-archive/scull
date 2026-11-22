@@ -6,6 +6,7 @@
 | [benchmarks/baseline.md](benchmarks/baseline.md) | Baseline benchmark results (re-run in T3) |
 | [benchmarks/macos-renderer.md](benchmarks/macos-renderer.md) | macOS renderer measurements (re-run in T15) |
 | [benchmarks/windows-renderer.md](benchmarks/windows-renderer.md) | Windows renderer measurements (re-run in T17) |
+| [design.md](design.md) | UI design: every Figma frame of the Modern terminal file, described and linked |
 | [research/](research/) | Per-terminal research notes: kitty, WezTerm and Alacritty, foot and Contour, Warp, FFI to native UI |
 | [site.md](site.md) | Website copy for the pyrlyn project site |
 

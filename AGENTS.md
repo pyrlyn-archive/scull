@@ -9,6 +9,7 @@ If an `AGENTS.md` or `CLAUDE.md` exists higher in the tree, follow it too; on co
 - `PLAN.md` — goal, architecture, phases and CI for the Kotlin/Native rewrite.
 - `research.md` — the architecture report and the reasons behind every choice.
 - `docs/research/` — per-terminal findings with `path:line` sources.
+- `docs/design.md` — the UI design in Figma, one entry per frame with its link and node id. UI work starts from the frame it names; read it with the Figma MCP tools.
 - `plan/` — tasks, one folder each (`plan/<id>/task.md`); every task is currently not started. A closed task also has `done.md`.
 
 ## Hard rules
