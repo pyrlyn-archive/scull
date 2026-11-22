@@ -1,3 +1,10 @@
-# T34. Decode PNG through the shared rgba-png crate
+# T34. Decode PNG through a shared, allocation-capped decoder
 
-scull-image's `raster::decode_png` and `widen` moved to the shared `rgba-png` crate (pyrlyn/crates, also used by slint-bindings). `decode_png` keeps its order: header first, `rgba_len` on the size before any pixel buffer, then the capped decode; png errors still map to `ImageError::Decode`. Test fixtures encode through `rgba_png::encode_png`, so they now carry an sRGB chunk; `png` stays as a dev-dependency for the grey and palette fixtures.
+Status: not started
+
+PNG decode for iTerm2 images and kitty `f=100` goes through one shared decoder: read the header first, compute the RGBA length from the size before allocating a pixel buffer, then decode with a hard allocation cap. Errors map to `ImageError.Decode`. Test fixtures can encode through the same helper; grey and palette PNGs stay covered.
+
+Acceptance:
+- [ ] Header-first, size-capped PNG decode lives in a shared module used by `scull-image`.
+- [ ] Tests cover cap failures, grey and palette fixtures, and sRGB output.
+- [ ] `./gradlew check` passes.

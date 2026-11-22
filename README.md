@@ -3,21 +3,18 @@
 
 # Scull
 
-A terminal emulator with a Rust core and a native interface on each platform: SwiftUI on macOS, WinUI on Windows. The core parses, keeps state and encodes input; the platform draws text with its own text stack and handles windows, input methods and accessibility.
+A terminal emulator with a Kotlin/Native core and a native interface on each platform: SwiftUI on macOS, WinUI on Windows. The core parses, keeps state and encodes input; the platform draws text with its own text stack and handles windows, input methods and accessibility.
 
-Status: early development, no release yet. The Rust core lives in [`crates/`](crates/) (parser,
-grid, PTY, input, Unicode, image, config and the C ABI in `scull-ffi`); the SwiftUI app is in
-[`macos/`](macos/) and the WinUI app in [`windows/`](windows/).
+Status: early development, no release yet. The project is being rebuilt in **Kotlin/Native**. The implementation plan is in [`PLAN.md`](PLAN.md); task folders are in [`plan/`](plan/README.md). The SwiftUI app lives in [`macos/`](macos/) and the WinUI app in [`windows/`](windows/). They will link the core through the same C ABI (`scull.h`) once the core is built.
 
 ```bash
-just check         # format, lint and test the Rust workspace
-just macos         # build the macOS app
-just windows-app   # build the Windows app
+mise install        # JDK 21 and the lint tools from mise.toml
+./gradlew check     # format, lint and test the Kotlin/Native core (from T2)
 ```
 
 - [docs/](docs/README.md) — benchmarks, research notes and the config schema.
 - [research.md](research.md) — how kitty, WezTerm, Alacritty, foot, Contour and Warp work, and what Scull takes from each.
-- [plan/](plan/README.md) — tasks, one folder each; a closed task also has `done.md`.
+- [plan/](plan/README.md) — tasks, one folder each. All tasks were reset and are not started.
 - [roadmap.md](roadmap.md) — approved later work.
 
 ## License

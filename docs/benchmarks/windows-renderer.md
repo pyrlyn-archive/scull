@@ -1,5 +1,8 @@
 # Windows renderer
 
+> Note: These figures predate the Kotlin/Native rewrite and must be re-measured in T17.
+
+
 Measurements of the Direct3D 11 renderer (`windows/Scull.Render`) on the T3 input, taken by `windows/Scull.Bench` on 2026-10-16 in [CI run 38888536284](https://github.com/pyrlyn/scull/actions/runs/38888536284), job `rust (windows-latest)`, step `just windows-bench`. **These are numbers from a shared GitHub Actions VM** (Windows 10.0.26100, AMD EPYC family 25, 4 logical processors), single runs, with no physical GPU known to be present. Read them as orders of magnitude, not as a regression gate, and not as what a desktop with a GPU does.
 
 ## Method

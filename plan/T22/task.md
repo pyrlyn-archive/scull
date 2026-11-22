@@ -1,3 +1,9 @@
-# T22. No-op link clears are generation-neutral in Row::set_link
+# T22. No-op link clears are generation-neutral
 
-`crates/scull-grid/src/row.rs`'s `set_link` bumped the generation unconditionally, so clearing links on every plain cell write forced a repaint per write — while `set()` deliberately skips the bump for no-op writes. Found by the 2026-10-07 audit.
+Status: not started
+
+Clearing a row link that is already empty must not bump the row generation. Otherwise a no-op clear looks like damage and forces a repaint. Done when a test shows that a second clear of an empty link leaves the generation unchanged, and that a real link change still bumps it.
+
+Acceptance:
+- [ ] The grid's link-clear path is generation-neutral for no-ops, with tests in the Kotlin/Native core.
+- [ ] `./gradlew check` passes.

@@ -1,5 +1,7 @@
 # T19. Images
 
+Status: not started
+
 Sixel, kitty graphics and iTerm2 inline images decoded in the core to RGBA, kept as a positioned list with an image and placement split and a quota with LRU eviction. The frame carries placements; the platform uploads textures. Done when each protocol has golden tests and the decoders have fuzz targets.
 
 Execution plan (split to fit the 500-line budget; this run does T19.1–T19.3, T19.4 waits for T9):
@@ -8,4 +10,8 @@ Execution plan (split to fit the 500-line budget; this run does T19.1–T19.3, T
 - T19.2 Sixel decoder: streaming `put` of DCS bytes into an RGBA buffer, palette and raster attributes, with width, height and colour caps. Reuse a maintained crate if one fits; otherwise write it and say why in the commit.
 - T19.3 Kitty graphics protocol (APC `G`): key parsing, chunked transmission (`m=1`), formats 24/32/100, zlib via `flate2`, transmit/put/delete actions, quiet levels, and the reply strings, as a pure decoder over the store. kitty is GPL-3.0-only: implement from the protocol spec, never port its code.
 - T19.4 (after T9) Wire `scull-image` into `scull-term` (DCS/APC/OSC routing, placement on cursor, scroll and reflow re-anchoring, alt-screen clearing) and into the frame as placements.
-- Verify: golden tests per protocol, proptests on the store's quota and LRU, a fuzz target per decoder in `fuzz/`, crate graph test updated, `just check` exit 0.
+- Verify: golden tests per protocol, proptests on the store's quota and LRU, a fuzz target per decoder in `fuzz/`, crate graph test updated, `./gradlew check` exit 0.
+
+Acceptance:
+- [ ] The work described above is implemented in Kotlin/Native (platform UI stays Swift/C# where this task says so).
+- [ ] Tests and the `./gradlew check` gate (plus the platform tests this task names) pass.
