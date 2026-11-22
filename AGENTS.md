@@ -45,4 +45,5 @@ mise x -- jactionlint --baseline-write # refresh the baseline after fixing findi
 mise x -- hk install --mise            # install the pre-push hook once per clone
 ./gradlew check                        # merge gate: ktlint and the native tests of the host's targets
 ./gradlew :scull-ffi:linkReleaseSharedMacosArm64   # libscull for a host (also Static, LinuxX64, MingwX64)
+./gradlew :scull-bench:runReleaseExecutableMacosArm64  # rewrite docs/benchmarks/baseline.md
 ```
