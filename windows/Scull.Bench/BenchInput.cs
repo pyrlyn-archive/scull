@@ -7,8 +7,8 @@ internal static class BenchInput
     public const int Columns = 80;
 
     /// <summary>
-    /// <c>scull_bench::fixed_input</c>: A to Z, a line feed closing every 80 bytes. A copy because the
-    /// generator is Rust; both tests pin <see cref="Hash"/> of it, so the copies cannot drift apart.
+    /// <c>scull.bench.fixedInput</c>: A to Z, a line feed closing every 80 bytes. A copy because the
+    /// generator is Kotlin/Native; both tests pin <see cref="Hash"/> of it, so the copies cannot drift apart.
     /// </summary>
     public static byte[] Fixed()
     {
