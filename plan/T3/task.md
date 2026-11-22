@@ -2,7 +2,7 @@
 status: in progress
 priority: P0
 complexity: 3
-readiness: 10%
+readiness: 80%
 agent: Claude Code / claude-opus-5-5
 ---
 
@@ -19,5 +19,10 @@ Execution plan (a port of the previous Rust `scull-harness` and `scull-bench`, l
 The task stays open until the same input is timed on the six reference terminals; the harness half is done when it runs in CI against the stub.
 
 Acceptance:
-- [ ] The work described above is implemented in Kotlin/Native (platform UI stays Swift/C# where this task says so).
-- [ ] Tests and the `./gradlew check` gate (plus the platform tests this task names) pass.
+- [x] The work described above is implemented in Kotlin/Native (platform UI stays Swift/C# where this task says so).
+- [x] Tests and the `./gradlew check` gate (plus the platform tests this task names) pass.
+
+## Progress
+
+- Harness, fuzz invariant with its seeded corpus, and bench are in https://github.com/pyrlyn/scull/pull/65. `./gradlew check` passes on macOS arm64; the `linuxX64` test binaries pass in an amd64 container on Colima.
+- Open: none of kitty, WezTerm, Alacritty, foot or Contour is installed on the measuring Mac, and Warp has no headless stdin feed, so `docs/benchmarks/baseline.md` has only the stub row timed. The task closes when the reference terminals are timed on the same input.
