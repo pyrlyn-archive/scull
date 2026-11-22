@@ -2,7 +2,7 @@
 status: in progress
 priority: P0
 complexity: 3
-readiness: 10%
+readiness: 90%
 agent: Claude Code / claude-opus-5-5
 ---
 
@@ -13,8 +13,8 @@ Gradle Kotlin Multiplatform workspace with the seven modules of `research.md` §
 Targets: `macosArm64` (primary), `linuxX64`, and `mingwX64` for the core library the Windows host loads. The C ABI module (`scull-ffi`) produces a static or shared library for the Swift and C# apps.
 
 Acceptance:
-- [ ] The seven modules exist, compile as Kotlin/Native, and lint clean.
-- [ ] `./gradlew check` is the merge gate and is documented in `README.md` and `toolchain.md`.
+- [x] The seven modules exist, compile as Kotlin/Native, and lint clean.
+- [x] `./gradlew check` is the merge gate and is documented in `README.md` and `toolchain.md`.
 
 ## Execution plan
 
