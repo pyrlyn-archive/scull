@@ -9,7 +9,7 @@ If an `AGENTS.md` or `CLAUDE.md` exists higher in the tree, follow it too; on co
 - `PLAN.md` — goal, architecture, phases and CI for the Kotlin/Native rewrite.
 - `research.md` — the architecture report and the reasons behind every choice.
 - `docs/research/` — per-terminal findings with `path:line` sources.
-- `plan/` — tasks, one folder each (`plan/<id>/task.md`); every task is currently not started. A closed task also has `done.md`.
+- `plan/` — tasks, one folder each (`plan/<id>/task.md`). A closed task also has `done.md`; an open one without front matter is not started.
 
 ## Hard rules
 
