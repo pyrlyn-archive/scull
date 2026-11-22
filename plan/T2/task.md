@@ -22,7 +22,7 @@ The skeleton reuses the one runa landed in its phase 0 (pyrlyn/runa#142): the sa
 
 1. Gradle wrapper (`gradlew`, `gradlew.bat`, `gradle/wrapper/`), `gradle.properties`, `gradle/libs.versions.toml` (Kotlin, ktlint-gradle, ktlint).
 2. `build-logic/`: `scull.kmp` (targets `macosArm64`, `linuxX64`, `mingwX64`; warnings as errors; ktlint; `kotlin.test`) and `scull.library` (adds `explicitApi()`).
-3. `settings.gradle.kts` with the seven modules `scull-ffi`, `scull-term`, `scull-input`, `scull-grid`, `scull-unicode`, `scull-parser`, `scull-pty`, wired by the layering of `PLAN.md` §3. `scull-ffi` builds a shared and a static library named `scull`. Each module gets one smoke test so `check` runs real native tests on every target.
+3. `settings.gradle.kts` with the seven modules `scull-ffi`, `scull-term`, `scull-input`, `scull-grid`, `scull-unicode`, `scull-parser`, `scull-pty`, wired by the layering of `PLAN.md` §3. `scull-ffi` builds a shared and a static library named `scull`; Kotlin/Native links no library from an empty module, so it exports `scull_abi_version` with a test. The other six modules stay empty until their tasks.
 4. CI: `ci.yml` gains `<os> (<target>)` jobs (macOS `macosArm64`, Ubuntu `linuxX64`, Windows `mingwX64`) that run `./gradlew check` and link the `scull` libraries, keeping the jactionlint job and the `SKIP_CI_TESTS` / `MACOS_CI_DISABLED` switches.
 5. Docs: `toolchain.md` (Gradle rows, a Gradle plugins table), `README.md` and `AGENTS.md` commands, `PLAN.md` §6.
 6. Verify: `./gradlew check` and the library link tasks on macOS locally; the three CI jobs green on the PR.
