@@ -29,4 +29,4 @@ About 930 hand-written lines (generator, library and tests), over the 500-line b
   - Seeded random text segments and sizes without error.
 - The same 24 tests pass on linuxX64 in Ubuntu 24.04 (amd64) on Colima.
 - `checkUcd` passes, and fails when a generated file is edited.
-- mingwX64 is covered by the PR's CI.
+- mingwX64 is covered by the CI of https://github.com/pyrlyn/scull/pull/68.
