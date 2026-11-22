@@ -99,7 +99,7 @@ Each phase lists the existing `plan/T*` tasks. Every checkbox starts unchecked.
 
 ### Phase 2: VT core
 
-- [ ] **T4.** Parser: bulk scanner in front of a table state machine, hard caps, fuzz target.
+- [x] **T4.** Parser: bulk scanner in front of a table state machine, hard caps, fuzz target.
 - [ ] **T5.** Unicode tables: generated width and grapheme-break tables, mode 2027.
 - [ ] **T6.** Grid and scrollback: fixed cells, interning, power-of-two ring.
 - [ ] **T7.** Terminal state: modes, cursor, SGR, alt screen, device reports.
