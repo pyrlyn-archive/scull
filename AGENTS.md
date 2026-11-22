@@ -46,4 +46,5 @@ mise x -- hk install --mise            # install the pre-push hook once per clon
 ./gradlew check                        # merge gate: ktlint and the native tests of the host's targets
 ./gradlew :scull-ffi:linkReleaseSharedMacosArm64   # libscull for a host (also Static, LinuxX64, MingwX64)
 ./gradlew :scull-bench:runReleaseExecutableMacosArm64  # rewrite docs/benchmarks/baseline.md
+./gradlew :scull-bench:runReleaseExecutableMacosArm64 --args=parser  # parser throughput table (docs/benchmarks/parser.md)
 ```

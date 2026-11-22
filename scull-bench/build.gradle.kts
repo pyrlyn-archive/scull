@@ -23,6 +23,7 @@ kotlin {
 
         commonMain.dependencies {
             implementation(projects.scullHarness)
+            implementation(projects.scullParser)
             implementation(libs.okio)
         }
     }

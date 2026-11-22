@@ -4,6 +4,7 @@
 | --- | --- |
 | [config.schema.json](config.schema.json) | JSON Schema of the config file (regenerated from the config types, T20) |
 | [benchmarks/baseline.md](benchmarks/baseline.md) | Baseline benchmark results (re-run in T3) |
+| [benchmarks/parser.md](benchmarks/parser.md) | Parser throughput against vte (T4) |
 | [benchmarks/macos-renderer.md](benchmarks/macos-renderer.md) | macOS renderer measurements (re-run in T15) |
 | [benchmarks/windows-renderer.md](benchmarks/windows-renderer.md) | Windows renderer measurements (re-run in T17) |
 | [research/](research/) | Per-terminal research notes: kitty, WezTerm and Alacritty, foot and Contour, Warp, FFI to native UI |
