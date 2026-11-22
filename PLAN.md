@@ -176,11 +176,12 @@ Each phase lists the existing `plan/T*` tasks. Every checkbox starts unchecked.
 
 ## 6. CI
 
-Until T2 lands a Gradle wrapper, CI keeps the workflow lint only (the `jactionlint` job in
-`.github/workflows/ci.yml`, also the `hk.pkl` pre-push hook). `pipeline.yml` still runs the
-shared scans from `pyrlyn/ci` (configured in `.github/infra.yml`).
+`.github/workflows/ci.yml` runs the `jactionlint` job (also the `hk.pkl` pre-push hook) and,
+since T2, one `<os> (<target>)` job per target that runs `./gradlew check` and links the
+`scull` shared and static libraries. `pipeline.yml` still runs the shared scans from
+`pyrlyn/ci` (configured in `.github/infra.yml`).
 
-After T2 / T29, `ci.yml` should grow required jobs named `<os> (<target>)`:
+The `<os> (<target>)` jobs grow these steps as the tasks land, and T29 makes them required:
 
 | Runner | Target | What it runs |
 | --- | --- | --- |
@@ -217,7 +218,7 @@ Removed: the Cargo workspace and crates, fuzz and `tools/` Rust generators, `wor
   Swift or C#.
 - The existing Swift and C# hosts expect the previous `scull.h`. T10 should keep that ABI
   or document a version bump and update both hosts in the same change.
-- No Gradle wrapper lands in the reset PR; T2 is the first compile. Until then, `./gradlew
-  check` in the README is a promise, not a command that runs.
+- Kotlin Gradle plugin 2.4 uses a plain enum as a Gradle attribute, a deprecation that
+  Gradle 10 turns into an error; KGP 2.5 fixes it. Move to Kotlin 2.5 before Gradle 10.
 - CodeQL has no Kotlin/Native extractor; scans stay on Actions, plus C# and Swift for the
   hosts.

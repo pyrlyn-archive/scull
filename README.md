@@ -9,12 +9,12 @@ Status: early development, no release yet. The project is being rebuilt in **Kot
 
 ```bash
 mise install        # JDK 21 and the lint tools from mise.toml
-./gradlew check     # format, lint and test the Kotlin/Native core (from T2)
+./gradlew check     # lint (ktlint) and test the Kotlin/Native core: the merge gate
 ```
 
 - [docs/](docs/README.md) — benchmarks, research notes and the config schema.
 - [research.md](research.md) — how kitty, WezTerm, Alacritty, foot, Contour and Warp work, and what Scull takes from each.
-- [plan/](plan/README.md) — tasks, one folder each. All tasks were reset and are not started.
+- [plan/](plan/README.md) — tasks, one folder each; a closed task has a `done.md`.
 - [roadmap.md](roadmap.md) — approved later work.
 
 ## License

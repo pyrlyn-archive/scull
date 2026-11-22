@@ -43,5 +43,6 @@ mise install                           # JDK 21 and the lint tools
 mise x -- jactionlint                  # lint workflows, composite actions, dependabot.yml
 mise x -- jactionlint --baseline-write # refresh the baseline after fixing findings
 mise x -- hk install --mise            # install the pre-push hook once per clone
-./gradlew check                        # merge gate, once the T2 scaffold exists
+./gradlew check                        # merge gate: ktlint and the native tests of the host's targets
+./gradlew :scull-ffi:linkReleaseSharedMacosArm64   # libscull for a host (also Static, LinuxX64, MingwX64)
 ```

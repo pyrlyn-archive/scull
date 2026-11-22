@@ -5,8 +5,9 @@
 | Program | How to install | Why here | Source |
 | --- | --- | --- | --- |
 | JDK 21 (Temurin) | mise (`java = "temurin-21"` in `mise.toml`) | Runs Gradle and the Kotlin/Native compiler | https://adoptium.net |
-| Gradle wrapper | added in T2 (`./gradlew`) | Builds the Kotlin/Native core, runs tests and ktlint | https://gradle.org |
-| Kotlin/Native | the Kotlin Gradle plugin, pinned in the wrapper build | Compiles the core for `macosArm64`, `linuxX64` and `mingwX64` | https://kotlinlang.org/docs/native-overview.html |
+| Gradle | the wrapper (`./gradlew`, 9.9.2 with a pinned SHA-256 in `gradle/wrapper/gradle-wrapper.properties`) | Builds the Kotlin/Native core; `./gradlew check` (ktlint and the native tests) is the merge gate | https://github.com/gradle/gradle |
+| Kotlin/Native | the Kotlin Gradle plugin (`gradle/libs.versions.toml`); Gradle downloads the compiler into `~/.konan` | Compiles the core for `macosArm64`, `linuxX64` and `mingwX64`; a macOS host cross-links all three, tests run only on the host's own target | https://github.com/JetBrains/kotlin |
+| ktlint | the ktlint Gradle plugin runs the version pinned in `gradle/libs.versions.toml` | Formatting and lint of every Kotlin source and build script, part of `check` | https://github.com/pinterest/ktlint |
 | mise | brew, then `mise install` | Pins the JDK and lint tools for local work and CI | https://github.com/jdx/mise |
 | jactionlint | mise (`mise.toml` pins `github:jdx/jactionlint` 2.0.2) | Lint the workflows (the `jactionlint` CI job, the pre-push hook and `mise x -- jactionlint`) | https://github.com/jdx/jactionlint |
 | hk | mise (`mise.toml` pins 2.5.0) | Runs jactionlint as a pre-push hook (`hk.pkl`) | https://github.com/jdx/hk |
@@ -17,7 +18,15 @@
 | .NET SDK (`dotnet`, C# compiler, MSBuild) | https://dot.net (pinned to 10.0.401 in `windows/global.json`; CI: `actions/setup-dotnet`) | Build and test the C# projects in `windows/` | https://github.com/dotnet/sdk |
 | Direct3D 11 (with WARP), DirectWrite, `d3dcompiler_47.dll` | ship with Windows (whether the last is guaranteed: `research.md` §9) | `windows/Scull.Render`: draws frames, rasterises glyphs, compiles the HLSL at start-up; WARP renders the tests with no GPU | https://learn.microsoft.com/en-us/windows/win32/direct3d11/atoc-dx-graphics-direct3d-11 |
 
-The Kotlin/Native modules, cinterop bindings (POSIX PTY, ConPTY) and a fuzz/property-test runner are chosen and recorded here in T2, T8 and T25.
+The cinterop bindings (POSIX PTY, ConPTY) and a fuzz/property-test runner are chosen and recorded here in T8 and T25.
+
+## Gradle
+
+| Package | Where | Source | Why here |
+| --- | --- | --- | --- |
+| org.jetbrains.kotlin:kotlin-gradle-plugin 2.4.21 | local (`gradle/libs.versions.toml`, used by `build-logic`) | https://github.com/JetBrains/kotlin | Kotlin Multiplatform and the Kotlin/Native compiler for every module |
+| org.jlleitschuh.gradle:ktlint-gradle 14.2.0 | local (`gradle/libs.versions.toml`, used by `build-logic`) | https://github.com/JLLeitschuh/ktlint-gradle | Runs ktlint 1.8.0 as part of `check` |
+| org.jetbrains.kotlin:kotlin-test | local (every module's `commonTest`, version from the Kotlin plugin) | https://github.com/JetBrains/kotlin | Test API of the native tests |
 
 ## Bundled files
 
