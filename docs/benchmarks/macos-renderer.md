@@ -1,5 +1,8 @@
 # macOS renderer
 
+> Note: These figures predate the Kotlin/Native rewrite and must be re-measured in T15.
+
+
 Measurements of the Metal renderer (T15) on 2026-10-08, Apple M3 Max, macOS 27.0.1. Numbers are single runs on a machine with other work going on; read them as orders of magnitude, not as a regression gate.
 
 ## Throughput

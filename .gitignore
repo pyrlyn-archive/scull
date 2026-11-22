@@ -1,10 +1,17 @@
-/target
-/fuzz/target
-/fuzz/corpus
-/fuzz/artifacts
+# Gradle / Kotlin
+.gradle/
+build/
+.kotlin/
+local.properties
+# Keep the wrapper jar once the Gradle wrapper is added (T2).
+!gradle/wrapper/gradle-wrapper.jar
+
+# IDE / OS
+.idea/
+*.iml
 .DS_Store
-/.claude/worktrees
+
+# Native UI build output
 /macos/.build
 /windows/*/bin
 /windows/*/obj
-nextest-archive.tar.zst

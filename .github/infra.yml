@@ -3,7 +3,7 @@
 version: 1
 
 codeql:
-  languages: [actions, csharp, rust, swift]
+  languages: [actions, csharp, swift]
 
 # Snyk stays off (pyrlyn/ci default).
 snyk:

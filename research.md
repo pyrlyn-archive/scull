@@ -1,6 +1,6 @@
 # Terminal emulator architecture — research report
 
-Research for Scull: a terminal with a Rust core and a native UI per platform (SwiftUI on macOS, WinUI on Windows) joined by FFI. Rust computes, the platform renders.
+Research for Scull: a terminal with a Kotlin/Native core and a native UI per platform (SwiftUI on macOS, WinUI on Windows) joined by FFI. The core computes, the platform renders.
 
 All sources were checked on 2026-10-02. Nothing was built or benchmarked: every performance statement below is a reading of the code, not a measurement, unless it says otherwise.
 
@@ -28,7 +28,7 @@ The brief names "Wrapp". No terminal of that name exists on GitHub; the creator 
 1. **Warp is not a model of core/UI separation.** Its terminal crate imports UI-framework types, its session model lives in the app crate, and its renderer reads the grid under the same mutex the PTY thread writes through. It has no frame snapshot and no render damage tracking (warp.md A.2, A.4). It is a reference for the PTY thread, the event vocabulary, tests and conventions, not for the boundary.
 2. **No surveyed terminal does "platform renders".** Ghostty and Windows Terminal both keep the GPU renderer and shaping inside the core; the native layer supplies a view, input, IME and chrome (ffi-native-ui.md §0, Part 1). Scull's requirement is stricter than both.
 3. **The closest precedents for our boundary** are Contour's `RenderBuffer` (a resolved snapshot handed to a frontend that only draws) and libghostty-vt's `RenderState` (caller-owned snapshot with per-row dirty flags). Both need the same four changes: flat arrays, per-row generations, a queued event stream instead of callbacks, and platform text stacks instead of the built-in rasteriser (foot-contour.md Part 3a; ffi-native-ui.md Part 1).
-4. **No existing Rust core fits.** `alacritty_terminal` is clean and published but stores one `char` per cell, has no images and no input encoders. `wezterm-term` has every feature but is unpublished, heavy, and has no flat buffer. The recommendation is our own state and grid crate on top of leaf crates (wezterm-alacritty.md §4).
+4. **No existing core library fits as a drop-in.** `alacritty_terminal` is clean and published but stores one `char` per cell, has no images and no input encoders. `wezterm-term` has every feature but is unpublished, heavy, and has no flat buffer. The recommendation is our own Kotlin/Native state and grid, not an embed of those libraries (wezterm-alacritty.md §4).
 5. **Every surveyed terminal has a weakness the others fix**, so "take only the best" is a real design, not a slogan. Section 4 lists the pick per stage.
 
 ## 3. Comparison by pipeline stage
@@ -85,15 +85,15 @@ Transfers:
 4. Synchronized output handled in the parser driver with caps.
 5. Flat-text scrollback with run-length attributes, as an idea for cold history.
 6. Per-entry caps on untrusted input.
-7. Ref tests; clippy `-D warnings`; a disallowed-types list; non-fatal invariant reporting.
+7. Ref tests; compiler warnings as errors; a disallowed-types list; non-fatal invariant reporting.
 
 Does not transfer:
 
-1. The shared mutex: Swift and C# cannot hold a Rust guard. A core-owned snapshot replaces it.
+1. The shared mutex: Swift and C# cannot hold a core lock. A core-owned snapshot replaces it.
 2. No damage tracking: over FFI the marshalling cost dominates, so per-row dirty state is required.
 3. UI types in the core.
 4. Channels that assume an in-process async executor.
-5. Shaping in Rust: with native UI the snapshot carries text runs and cluster boundaries, not glyph ids.
+5. Shaping in the core: with native UI the snapshot carries text runs and cluster boundaries, not glyph ids.
 6. Per-scalar width: platform shaping needs grapheme-correct cells.
 7. The private shell-integration protocol; OSC 133 and OSC 7 are the public equivalents.
 
@@ -124,6 +124,8 @@ Reuse of Rust crates (wezterm-alacritty.md §4):
 | `vte` | 0.15 | Alternative: bulk path built in, but APC is dropped, which blocks kitty graphics |
 | `alacritty_terminal` | 0.26.0 | Learn from: ring storage, damage bounds, lease read loop |
 | `wezterm-term` and friends | git only | Learn from; fallback is a pinned fork treated as owned code |
+
+These tooling and crate recommendations were written for a Rust core. The Kotlin/Native rewrite keeps the same ABI shape (a committed `scull.h` and C# P/Invoke bindings) and the same PTY and parser design, implemented in Kotlin/Native with cinterop rather than those crates.
 
 ### 6.1 Windows host: the C# interop library (T17)
 
@@ -178,7 +180,7 @@ Rules of the boundary (ffi-native-ui.md Part 4):
 - **Shaping.** The platform shapes. The core alone decides cell widths.
 - **Events.** One coalesced wakeup, then a polled queue: title, bell, clipboard read and write (with reply or deny), URL, notification, child exit.
 - **Input.** A key struct with physical key, modifiers, consumed modifiers, text, unshifted code point and composing flag. The core encodes bytes.
-- **Safety.** `catch_unwind` on every export; a panic poisons one terminal, not the app. Status codes, no unwinding across the boundary.
+- **Safety.** Every C export catches uncaught exceptions; an uncaught exception poisons one terminal, not the app. Status codes, no unwinding across the boundary.
 - **ABI.** Version check at start-up, `struct_size` first in every struct, append-only enums. Generated header and C# bindings are committed and diff-checked in CI.
 - **Tests.** Headless: golden frames, esctest and vttest, fuzzing, and a property test that a dirty-row repaint equals a full repaint.
 
@@ -190,7 +192,7 @@ The creator accepted the recommendations below except 2, where the choice is all
 | --- | --- | --- |
 | 1 | "Wrapp" means Warp | Confirmed |
 | 2 | Windows host language | Recommended: C# WinUI 3 shell plus a C++/WinRT surface control (Windows Terminal's own split). **Creator chose all C#**; the interop library is Microsoft.Windows.CsWin32 (§6.1) |
-| 3 | VT core | Our own Rust state and grid on leaf crates, not libghostty-vt (unstable API, adds a Zig toolchain) |
+| 3 | VT core | Our own Kotlin/Native state and grid, not libghostty-vt (unstable API, adds a Zig toolchain) |
 | 4 | PTY | Inside the core |
 | 5 | Minimum macOS | Recommended: 14, for `CAMetalDisplayLink`. **Creator chose 26** |
 | 6 | Project licence | **Creator chose GPL-3.0-or-later**, with paid subscription services around the terminal. MIT, Apache-2.0 and GPL-3 sources may be ported; Warp's AGPL core stays study-only |
