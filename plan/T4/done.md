@@ -16,4 +16,4 @@ Checked:
 - Linux: the same tests on `linuxX64` in an amd64 Ubuntu 24.04 container on Colima.
 - Windows: `mingwX64` in CI on the PR.
 
-PR: see the PR for branch `t4-parser`.
+PR: https://github.com/pyrlyn/scull/pull/67
