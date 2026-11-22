@@ -2,7 +2,7 @@
 status: in progress
 priority: P0
 complexity: 4
-readiness: 10%
+readiness: 100%
 agent: Claude Code / claude-opus-5-5
 ---
 
@@ -21,5 +21,5 @@ The Rust tree at 69d9be4 already solved this (`crates/scull-unicode`, `tools/scu
 5. Verify with `./gradlew check` on macOS and on linuxX64 under Colima, and `checkUcd`.
 
 Acceptance:
-- [ ] The work described above is implemented in Kotlin/Native (platform UI stays Swift/C# where this task says so).
-- [ ] Tests and the `./gradlew check` gate (plus the platform tests this task names) pass.
+- [x] The work described above is implemented in Kotlin/Native (platform UI stays Swift/C# where this task says so).
+- [x] Tests and the `./gradlew check` gate (plus the platform tests this task names) pass.
