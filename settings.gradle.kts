@@ -26,4 +26,7 @@ include(
     ":scull-pty",
     ":scull-term",
     ":scull-ffi",
+    // Test and measurement tools; nothing in the shipped library depends on them.
+    ":scull-harness",
+    ":scull-bench",
 )
